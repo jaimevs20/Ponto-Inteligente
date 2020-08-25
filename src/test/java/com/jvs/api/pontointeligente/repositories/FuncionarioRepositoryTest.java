@@ -39,6 +39,11 @@ public class FuncionarioRepositoryTest {
 		this.funcionarioRepository.save(obterDadosFuncionario(empresa));
 	}
 	
+	@After
+	public final void tearDown() {
+		this.empresaRepository.deleteAll();
+	}
+	
 	private Funcionario obterDadosFuncionario(Empresa empresa) throws NoSuchAlgorithmException{
 		Funcionario funcionario = new Funcionario();
 		
@@ -59,11 +64,6 @@ public class FuncionarioRepositoryTest {
 		empresa.setCnpj("14523698745123");
 		
 		return empresa;
-	}
-
-	@After
-	public final void tearDown() {
-		this.empresaRepository.deleteAll();
 	}
 	
 	@Test

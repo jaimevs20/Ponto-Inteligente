@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.jaxb.SpringDataJaxb.PageRequestDto;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -66,8 +68,8 @@ public class LancamentoRepositoryTest {
 	
 	@Test
 	public void testBuscarPorFuncionarioPaginado() {
-		PageRequestDto page = new PageRequestDto();
-		Page<Lancamento> lancamentos = (Page<Lancamento>) this.lancamentoRepository.findByFuncionarioId(funcionarioId);
+		
+		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioId(funcionarioId, PageRequest.of(0,10));
 		
 		assertEquals(2, lancamentos.getTotalElements());
 	}
